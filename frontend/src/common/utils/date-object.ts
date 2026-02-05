@@ -7,15 +7,12 @@ import persian_fa from "react-date-object/locales/persian_fa"
 export class DateObjectUtils {
   private constructor() {}
 
-  public static toDateObject = (utcIso: string) =>
-    new DateObject({ date: utcIso, calendar: gregorian })
+  public static toDateObject = (utcIso: string) => new DateObject({ date: utcIso, calendar: gregorian })
 
   public static toGregorianEnglish = (date: DateObject) =>
     new DateObject({ date }).convert(gregorian).setLocale(gregorian_en)
 
-  public static toPersianFarsi = (date: DateObject) =>
-    new DateObject({ date }).convert(persian).setLocale(persian_fa)
+  public static toPersianFarsi = (date: DateObject) => new DateObject({ date }).convert(persian).setLocale(persian_fa)
 
-  public static toUtcIso = (date: DateObject) =>
-    DateObjectUtils.toGregorianEnglish(date).toDate().toISOString()
+  public static toUtcIso = (date: DateObject) => DateObjectUtils.toGregorianEnglish(date).toDate().toISOString()
 }

@@ -12,8 +12,6 @@ import { Route as rootRouteImport } from "./../../routes/__root"
 import { Route as LoginRouteImport } from "./../../routes/login"
 import { Route as IntroRouteImport } from "./../../routes/intro"
 import { Route as IndexRouteImport } from "./../../routes/index"
-import { Route as TimesIndexRouteImport } from "./../../routes/times/index"
-import { Route as SetupIndexRouteImport } from "./../../routes/setup/index"
 import { Route as DevIndexRouteImport } from "./../../routes/dev/index"
 
 const LoginRoute = LoginRouteImport.update({
@@ -31,16 +29,6 @@ const IndexRoute = IndexRouteImport.update({
   path: "/",
   getParentRoute: () => rootRouteImport,
 } as any)
-const TimesIndexRoute = TimesIndexRouteImport.update({
-  id: "/times/",
-  path: "/times/",
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SetupIndexRoute = SetupIndexRouteImport.update({
-  id: "/setup/",
-  path: "/setup/",
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DevIndexRoute = DevIndexRouteImport.update({
   id: "/dev/",
   path: "/dev/",
@@ -52,16 +40,12 @@ export interface FileRoutesByFullPath {
   "/intro": typeof IntroRoute
   "/login": typeof LoginRoute
   "/dev/": typeof DevIndexRoute
-  "/setup/": typeof SetupIndexRoute
-  "/times/": typeof TimesIndexRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/intro": typeof IntroRoute
   "/login": typeof LoginRoute
   "/dev": typeof DevIndexRoute
-  "/setup": typeof SetupIndexRoute
-  "/times": typeof TimesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -69,15 +53,13 @@ export interface FileRoutesById {
   "/intro": typeof IntroRoute
   "/login": typeof LoginRoute
   "/dev/": typeof DevIndexRoute
-  "/setup/": typeof SetupIndexRoute
-  "/times/": typeof TimesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/intro" | "/login" | "/dev/" | "/setup/" | "/times/"
+  fullPaths: "/" | "/intro" | "/login" | "/dev/"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/intro" | "/login" | "/dev" | "/setup" | "/times"
-  id: "__root__" | "/" | "/intro" | "/login" | "/dev/" | "/setup/" | "/times/"
+  to: "/" | "/intro" | "/login" | "/dev"
+  id: "__root__" | "/" | "/intro" | "/login" | "/dev/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -85,8 +67,6 @@ export interface RootRouteChildren {
   IntroRoute: typeof IntroRoute
   LoginRoute: typeof LoginRoute
   DevIndexRoute: typeof DevIndexRoute
-  SetupIndexRoute: typeof SetupIndexRoute
-  TimesIndexRoute: typeof TimesIndexRoute
 }
 
 declare module "@tanstack/react-router" {
@@ -112,20 +92,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/times/": {
-      id: "/times/"
-      path: "/times"
-      fullPath: "/times/"
-      preLoaderRoute: typeof TimesIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    "/setup/": {
-      id: "/setup/"
-      path: "/setup"
-      fullPath: "/setup/"
-      preLoaderRoute: typeof SetupIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     "/dev/": {
       id: "/dev/"
       path: "/dev"
@@ -141,8 +107,6 @@ const rootRouteChildren: RootRouteChildren = {
   IntroRoute: IntroRoute,
   LoginRoute: LoginRoute,
   DevIndexRoute: DevIndexRoute,
-  SetupIndexRoute: SetupIndexRoute,
-  TimesIndexRoute: TimesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

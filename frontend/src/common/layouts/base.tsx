@@ -11,6 +11,4 @@ export const base = tv({
 
 type BaseProps = ComponentProps<"div"> & {}
 
-export const Base = ({ className, ...rest }: BaseProps) => (
-  <div className={base({ className })} {...rest} />
-)
+export const Base = ({ className, ...rest }: BaseProps) => <div className={base({ className })} {...rest} />

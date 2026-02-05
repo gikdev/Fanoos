@@ -1,7 +1,7 @@
 import tailwindcss from "@tailwindcss/vite"
 import { tanstackRouter } from "@tanstack/router-plugin/vite"
 import react from "@vitejs/plugin-react"
-import { defineConfig } from "vite"
+import { defineConfig, type UserConfig } from "vite"
 import tsconfigPaths from "vite-tsconfig-paths"
 
 const reactPlugin = react({
@@ -18,6 +18,11 @@ const tanstackRouterPlugin = tanstackRouter({
   generatedRouteTree: "./src/app/router/route-tree.gen.ts",
 })
 
+const server: UserConfig["server"] = {
+  port: 4368,
+}
+
 export default defineConfig({
   plugins: [tanstackRouterPlugin, reactPlugin, tailwindcss(), tsconfigPaths()],
+  server,
 })

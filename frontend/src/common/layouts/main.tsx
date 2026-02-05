@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 import { cn } from "tailwind-variants"
+
 import { base } from "./base"
 
 type MainProps = {
@@ -11,9 +12,7 @@ export const Main = ({ className, children }: MainProps) => (
   <div className="flex flex-col w-full h-full">
     <Nav />
 
-    <div className={base({ className: cn("py-8 w-full h-full", className) })}>
-      {children}
-    </div>
+    <div className={base({ className: cn("py-8 w-full h-full", className) })}>{children}</div>
   </div>
 )
 

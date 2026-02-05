@@ -41,3 +41,9 @@ tasks:
     aliases: [lfd]
     cmds:
       - npm run oxlint -- --fix --fix-suggestions --fix-dangerously
+
+  make-perfect:
+    aliases: [p]
+    cmds:
+      - task: format
+      - task: lint:fix:dangerously
