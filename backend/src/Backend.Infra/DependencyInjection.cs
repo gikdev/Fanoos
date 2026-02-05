@@ -1,7 +1,6 @@
 using Backend.App.Common.Interfaces;
 using Backend.Infra.Common.Persistence;
 using Backend.Infra.Sessions.Persistence;
-using Backend.Infra.YsqForms.Persistence;
 using Backend.Shared.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
