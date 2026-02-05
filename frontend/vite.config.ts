@@ -65,7 +65,7 @@ const server: UserConfig["server"] = {
   port: 4368,
   proxy: {
     "/api": {
-      target: "http://localhost:5078",
+      target: "http://localhost:5368",
       changeOrigin: true,
       secure: false,
     },
