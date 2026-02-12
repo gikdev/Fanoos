@@ -1,7 +1,6 @@
 namespace Fanoos.Common.Domain;
 
-public interface ISoftDeletable
-{
+public interface ISoftDeletable {
     DateTime? DeletedAtUtc { get; }
-    bool IsDeleted => DeletedAtUtc.HasValue;
+    bool      IsDeleted    => DeletedAtUtc.HasValue;
 }

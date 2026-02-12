@@ -1,16 +1,21 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿// ReSharper disable ArrangeRedundantParentheses
+// ReSharper disable MemberCanBeProtected.Global
+
+using System.Diagnostics.CodeAnalysis;
 
 namespace Fanoos.Common.Domain;
 
 public class Result {
     public Result(bool isSuccess, Error error) {
-        if (isSuccess && error != Error.None ||
-            !isSuccess && error == Error.None) {
+        if (
+            (isSuccess  && (error != Error.None)) ||
+            (!isSuccess && (error == Error.None))
+        ) {
             throw new ArgumentException("Invalid error", nameof(error));
         }
 
         IsSuccess = isSuccess;
-        Error = error;
+        Error     = error;
     }
 
     public bool IsSuccess { get; }

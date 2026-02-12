@@ -1,6 +1,5 @@
 namespace Fanoos.Common.Domain;
 
-public interface IEntity
-{
+public interface IEntity {
     Guid Id { get; }
 }

@@ -1,17 +1,8 @@
 ﻿namespace Fanoos.Common.Domain;
 
-public abstract class DomainEvent : IDomainEvent {
-    protected DomainEvent() {
-        Id = Guid.NewGuid();
-        OccurredOnUtc = DateTime.UtcNow;
-    }
+public abstract class DomainEvent(Guid id, DateTime occurredOnUtc) : IDomainEvent {
+    protected DomainEvent() : this(Guid.NewGuid(), DateTime.UtcNow) { }
 
-    protected DomainEvent(Guid id, DateTime occurredOnUtc) {
-        Id = id;
-        OccurredOnUtc = occurredOnUtc;
-    }
-
-    public Guid Id { get; init; }
-
-    public DateTime OccurredOnUtc { get; init; }
+    public Guid     Id            { get; init; } = id;
+    public DateTime OccurredOnUtc { get; init; } = occurredOnUtc;
 }
