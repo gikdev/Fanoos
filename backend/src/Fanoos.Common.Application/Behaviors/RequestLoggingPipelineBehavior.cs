@@ -11,11 +11,11 @@ internal sealed class RequestLoggingPipelineBehavior<TRequest, TResponse>(
     where TRequest : class
     where TResponse : Result {
     public async Task<TResponse> Handle(
-        TRequest request,
+        TRequest                          request,
         RequestHandlerDelegate<TResponse> next,
-        CancellationToken cancellationToken
+        CancellationToken                 cancellationToken
     ) {
-        string moduleName = GetModuleName(typeof(TRequest).FullName!);
+        string moduleName  = GetModuleName(typeof(TRequest).FullName!);
         string requestName = typeof(TRequest).Name;
 
         using (LogContext.PushProperty("Module", moduleName)) {
@@ -35,5 +35,7 @@ internal sealed class RequestLoggingPipelineBehavior<TRequest, TResponse>(
         }
     }
 
-    private static string GetModuleName(string requestName) => requestName.Split('.')[2];
+    private static string GetModuleName(string requestName) {
+        return requestName.Split('.')[2];
+    }
 }

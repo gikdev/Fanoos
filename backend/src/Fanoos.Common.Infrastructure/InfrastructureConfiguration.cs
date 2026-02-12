@@ -7,19 +7,19 @@ using Fanoos.Common.Infrastructure.Authorization;
 using Fanoos.Common.Infrastructure.Caching;
 using Fanoos.Common.Infrastructure.Clock;
 using Fanoos.Common.Infrastructure.Data;
+using Fanoos.Common.Infrastructure.Interceptors;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Npgsql;
-using Fanoos.Common.Infrastructure.Interceptors;
 
 namespace Fanoos.Common.Infrastructure;
 
 public static class InfrastructureConfiguration {
     public static IServiceCollection AddInfrastructure(
-        this IServiceCollection services,
+        this IServiceCollection             services,
         Action<IRegistrationConfigurator>[] moduleConfigureConsumers,
-        string databaseConnectionString
+        string                              databaseConnectionString
     ) {
         services.AddAuthenticationInternal();
 

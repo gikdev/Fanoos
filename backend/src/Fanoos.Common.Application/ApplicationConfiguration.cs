@@ -8,7 +8,7 @@ namespace Fanoos.Common.Application;
 public static class ApplicationConfiguration {
     public static IServiceCollection AddApplication(
         this IServiceCollection services,
-        Assembly[] moduleAssemblies
+        Assembly[]              moduleAssemblies
     ) {
         services.AddMediatR(config => {
             config.RegisterServicesFromAssemblies(moduleAssemblies);

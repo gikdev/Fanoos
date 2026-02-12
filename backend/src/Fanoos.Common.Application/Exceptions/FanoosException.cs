@@ -6,7 +6,7 @@ public sealed class FanoosException : Exception {
     public FanoosException(string requestName, Error? error = default, Exception? innerException = default)
         : base("Application exception", innerException) {
         RequestName = requestName;
-        Error = error;
+        Error       = error;
     }
 
     public string RequestName { get; }

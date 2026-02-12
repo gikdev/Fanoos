@@ -6,7 +6,7 @@ namespace Fanoos.Common.Infrastructure.Authorization;
 internal sealed class PermissionAuthorizationHandler : AuthorizationHandler<PermissionRequirement> {
     protected override Task HandleRequirementAsync(
         AuthorizationHandlerContext context,
-        PermissionRequirement requirement
+        PermissionRequirement       requirement
     ) {
         HashSet<string> permissions = context.User.GetPermissions();
 

@@ -9,8 +9,8 @@ namespace Fanoos.Common.Infrastructure.Interceptors;
 public sealed class PublishDomainEventsInterceptor(IServiceScopeFactory serviceScopeFactory) : SaveChangesInterceptor {
     public override async ValueTask<int> SavedChangesAsync(
         SaveChangesCompletedEventData eventData,
-        int result,
-        CancellationToken cancellationToken = default
+        int                           result,
+        CancellationToken             cancellationToken = default
     ) {
         if (eventData.Context is not null) {
             await PublishDomainEventsAsync(eventData.Context);

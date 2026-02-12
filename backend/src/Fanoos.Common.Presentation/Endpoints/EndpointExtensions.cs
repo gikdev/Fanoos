@@ -22,7 +22,7 @@ public static class EndpointExtensions {
 
     public static IApplicationBuilder MapEndpoints(
         this WebApplication app,
-        RouteGroupBuilder? routeGroupBuilder = null
+        RouteGroupBuilder?  routeGroupBuilder = null
     ) {
         IEnumerable<IEndpoint> endpoints = app.Services.GetRequiredService<IEnumerable<IEndpoint>>();
 

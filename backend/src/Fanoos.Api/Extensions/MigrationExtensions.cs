@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Fanoos.Modules.Main.Infrastructure.Database;
+﻿using Fanoos.Modules.Main.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fanoos.Api.Extensions;
 
@@ -10,7 +10,8 @@ internal static class MigrationExtensions {
         ApplyMigration<MainDbCtx>(scope);
     }
 
-    private static void ApplyMigration<TDbContext>(IServiceScope scope) where TDbContext : DbContext {
+    private static void ApplyMigration<TDbContext>(IServiceScope scope)
+        where TDbContext : DbContext {
         using TDbContext context = scope.ServiceProvider.GetRequiredService<TDbContext>();
 
         context.Database.Migrate();

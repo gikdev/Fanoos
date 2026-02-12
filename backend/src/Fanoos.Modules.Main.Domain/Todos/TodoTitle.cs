@@ -3,11 +3,10 @@ using Fanoos.Common.Domain;
 namespace Fanoos.Modules.Main.Domain.Todos;
 
 public record TodoTitle {
+    private TodoTitle() { }
     public string                      RawTitle { get; init; }
     public IReadOnlyCollection<string> Contexts { get; init; }
     public IReadOnlyCollection<string> Projects { get; init; }
-
-    private TodoTitle() { }
 
     public static Result<TodoTitle> Create(string rawTitle) {
         string[] words = rawTitle.Split(' ', StringSplitOptions.RemoveEmptyEntries);
@@ -23,7 +22,7 @@ public record TodoTitle {
         var todoTitle = new TodoTitle {
             Contexts = contexts,
             Projects = projects,
-            RawTitle = rawTitle,
+            RawTitle = rawTitle
         };
 
         return todoTitle;

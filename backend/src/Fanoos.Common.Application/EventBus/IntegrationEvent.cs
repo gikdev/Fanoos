@@ -2,7 +2,7 @@
 
 public abstract class IntegrationEvent : IIntegrationEvent {
     protected IntegrationEvent(Guid id, DateTime occurredOnUtc) {
-        Id = id;
+        Id            = id;
         OccurredOnUtc = occurredOnUtc;
     }
 

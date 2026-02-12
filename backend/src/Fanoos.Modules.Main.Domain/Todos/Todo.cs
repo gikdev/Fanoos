@@ -3,13 +3,13 @@
 namespace Fanoos.Modules.Main.Domain.Todos;
 
 public class Todo : HasDomainEvents, IAggregateRoot, IAuditable {
-    public Guid                   Id               { get; private init; }
     public TodoTitle              Title            { get; private set; }
     public string?                Description      { get; private set; }
     public DateTime?              DueDate          { get; private set; }
     public DateTime?              CompletedAt      { get; private set; }
     public EisenhowerMatrix       Eisenhower       { get; private set; }
     public DifficultyImpactMatrix DifficultyImpact { get; private set; }
+    public Guid                   Id               { get; private init; }
     public DateTime               CreatedAtUtc     { get; private init; }
     public DateTime?              UpdatedAtUtc     { get; private set; }
 
@@ -34,7 +34,7 @@ public class Todo : HasDomainEvents, IAggregateRoot, IAuditable {
             DifficultyImpact = difficultyImpact ?? defaultDifficultyImpact,
             DueDate          = dueDate,
             CompletedAt      = completedAt,
-            CreatedAtUtc     = now,
+            CreatedAtUtc     = now
         };
 
         return todo;

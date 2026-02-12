@@ -3,8 +3,6 @@
 public abstract class HasDomainEvents {
     private readonly List<IDomainEvent> _domainEvents = [];
 
-    protected HasDomainEvents() { }
-
     public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.ToList();
 
     public void ClearDomainEvents() {

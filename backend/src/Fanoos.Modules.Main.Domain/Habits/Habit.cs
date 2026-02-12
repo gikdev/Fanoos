@@ -6,17 +6,17 @@ public class Habit : HasDomainEvents, IAggregateRoot, IAuditable {
     private readonly List<HabitCompletion> _completions = [];
 
     private Habit() { }
-
-    public Guid      Id              { get; init; }
     public string    Name            { get; private set; }
     public string?   Description     { get; private set; }
     public DateTime? LastCompletedAt { get; private set; }
     public bool      IsCompleted     => LastCompletedAt.HasValue;
-    public DateTime  CreatedAtUtc    { get; init; }
-    public DateTime? UpdatedAtUtc    { get; private set; }
 
     /// <summary>Completions of a habit</summary>
     public IReadOnlyCollection<HabitCompletion> Completions => _completions.AsReadOnly();
+
+    public Guid      Id           { get; init; }
+    public DateTime  CreatedAtUtc { get; init; }
+    public DateTime? UpdatedAtUtc { get; private set; }
 
     public static Result<Habit> Create(
         string  name,
@@ -29,7 +29,7 @@ public class Habit : HasDomainEvents, IAggregateRoot, IAuditable {
             Id           = id ?? Guid.NewGuid(),
             Name         = name,
             Description  = description,
-            CreatedAtUtc = now,
+            CreatedAtUtc = now
         };
 
         return habit;

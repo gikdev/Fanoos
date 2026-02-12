@@ -3,15 +3,17 @@ using Fanoos.Api.Middleware;
 using Fanoos.Common.Application;
 using Fanoos.Common.Infrastructure;
 using Fanoos.Common.Presentation.Endpoints;
+using Fanoos.Modules.Main.Application;
 using Fanoos.Modules.Main.Infrastructure;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Serilog;
 using Npgsql;
 using Scalar.AspNetCore;
+using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-ConfigurationManager config  = builder.Configuration;
+ConfigurationManager  config  = builder.Configuration;
+
 string dbConnStr = new NpgsqlConnectionStringBuilder {
     Host     = config.GetValue<string?>("DB_HOST")     ?? throw new Exception("DB_HOST not set"),
     Port     = config.GetValue<int?>("DB_PORT")        ?? throw new Exception("DB_PORT not set"),

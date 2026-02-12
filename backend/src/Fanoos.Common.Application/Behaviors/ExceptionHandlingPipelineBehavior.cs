@@ -6,11 +6,12 @@ namespace Fanoos.Common.Application.Behaviors;
 
 internal sealed class ExceptionHandlingPipelineBehavior<TRequest, TResponse>(
     ILogger<ExceptionHandlingPipelineBehavior<TRequest, TResponse>> logger
-) : IPipelineBehavior<TRequest, TResponse> where TRequest : class {
+) : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : class {
     public async Task<TResponse> Handle(
-        TRequest request,
+        TRequest                          request,
         RequestHandlerDelegate<TResponse> next,
-        CancellationToken cancellationToken
+        CancellationToken                 cancellationToken
     ) {
         try {
             return await next(cancellationToken);

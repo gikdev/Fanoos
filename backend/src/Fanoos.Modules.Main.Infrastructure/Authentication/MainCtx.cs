@@ -7,5 +7,5 @@ namespace Fanoos.Modules.Main.Infrastructure.Authentication;
 
 internal sealed class MainCtx(IHttpContextAccessor httpContextAccessor) : IMainCtx {
     public Guid UserId => httpContextAccessor.HttpContext?.User.GetUserId() ??
-                              throw new FanoosException("User identifier is unavailable");
+                          throw new FanoosException("User identifier is unavailable");
 }

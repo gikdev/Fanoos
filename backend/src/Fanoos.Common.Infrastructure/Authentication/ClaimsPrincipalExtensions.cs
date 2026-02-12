@@ -7,9 +7,9 @@ public static class ClaimsPrincipalExtensions {
     public static Guid GetUserId(this ClaimsPrincipal? principal) {
         string? userId = principal?.FindFirst(CustomClaims.Sub)?.Value;
 
-        return Guid.TryParse(userId, out Guid parsedUserId) ?
-            parsedUserId :
-            throw new FanoosException("User identifier is unavailable");
+        return Guid.TryParse(userId, out Guid parsedUserId)
+            ? parsedUserId
+            : throw new FanoosException("User identifier is unavailable");
     }
 
     public static string GetIdentityId(this ClaimsPrincipal? principal) {

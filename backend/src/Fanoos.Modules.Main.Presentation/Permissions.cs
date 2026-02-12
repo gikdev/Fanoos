@@ -1,4 +1,3 @@
 ﻿namespace Fanoos.Modules.Main.Presentation;
 
-internal static class Permissions {
-}
+internal static class Permissions { }
