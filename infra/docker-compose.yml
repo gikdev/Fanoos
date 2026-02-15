@@ -1,9 +1,9 @@
 name: fanoos_infra
 
 services:
-  db:
+  fanoos.db:
+    container_name: Fanoos.Db
     image: postgres:16
-    container_name: db
     restart: on-failure
 
     environment:
@@ -15,7 +15,7 @@ services:
       - "${DB_PORT}:5432"
 
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - ./.containers/db:/var/lib/postgresql/data
 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
@@ -23,5 +23,12 @@ services:
       timeout: 5s
       retries: 5
 
-volumes:
-  db_data:
+  fanoos.seq:
+    container_name: Fanoos.Seq
+    image: datalust/seq:2025.2
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_NOAUTHENTICATION=true
+    ports:
+      - "${SEQ_INGEST_PORT}:5341"
+      - "${SEQ_UI_PORT}:80"

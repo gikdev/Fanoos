@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Fanoos.Common.Presentation\Fanoos.Common.Presentation.csproj" />
+    <ProjectReference Include="..\Fanoos.Modules.Main.IntegrationEvents\Fanoos.Modules.Main.IntegrationEvents.csproj" />
+    <ProjectReference Include="..\Fanoos.Modules.Main.Application\Fanoos.Modules.Main.Application.csproj" />
+  </ItemGroup>
+</Project>
