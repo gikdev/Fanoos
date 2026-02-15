@@ -7,28 +7,12 @@ services:
     restart: on-failure
 
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: fanoos
 
     ports:
-      - "${DB_PORT}:5432"
+      - "5432:5432"
 
     volumes:
       - ./.containers/db:/var/lib/postgresql/data
-
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  fanoos.seq:
-    container_name: Fanoos.Seq
-    image: datalust/seq:2025.2
-    environment:
-      - ACCEPT_EULA=Y
-      - SEQ_FIRSTRUN_NOAUTHENTICATION=true
-    ports:
-      - "${SEQ_INGEST_PORT}:5341"
-      - "${SEQ_UI_PORT}:80"
