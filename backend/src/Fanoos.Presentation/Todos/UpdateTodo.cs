@@ -25,11 +25,11 @@ internal sealed class UpdateTodo : IEndpoint {
     }
 
     private static async Task<IResult> Handle(
-        [FromServices] ISender                       mediator,
-        [FromRoute]    Guid                          id,
-        [FromBody]     UpdateTodoRequest             request
+        [FromServices] ISender           mediator,
+        [FromRoute]    Guid              id,
+        [FromBody]     UpdateTodoRequest request
     ) {
-        var validator = new UpdateTodoRequestValidator();
+        var validator        = new UpdateTodoRequestValidator();
         var validationResult = await validator.ValidateAsync(request);
         if (!validationResult.IsValid) return Results.BadRequest(validationResult.Errors);
 
@@ -51,7 +51,7 @@ internal sealed class UpdateTodo : IEndpoint {
         public required string RawTitle { get; init; }
     }
 
-    internal sealed class UpdateTodoRequestValidator : AbstractValidator<UpdateTodoRequest> {
+    private sealed class UpdateTodoRequestValidator : AbstractValidator<UpdateTodoRequest> {
         public UpdateTodoRequestValidator() {
             RuleFor(r => r.RawTitle).NotEmpty();
         }

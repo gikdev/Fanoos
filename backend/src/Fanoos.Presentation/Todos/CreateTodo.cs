@@ -1,10 +1,8 @@
 using Fanoos.Application.Todos.CreateTodo;
 using Fanoos.Common.Endpoints;
 using Fanoos.Common.Extensions;
-using Fanoos.Domain.Todos;
 using Fanoos.Presentation.Todos.Common;
 using FluentValidation;
-using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -25,10 +23,10 @@ internal sealed class CreateTodo : IEndpoint {
     }
 
     private static async Task<IResult> Handle(
-        [FromServices] ISender                       mediator,
-        [FromBody]     CreateTodoRequest             request
+        [FromServices] ISender           mediator,
+        [FromBody]     CreateTodoRequest request
     ) {
-        var validator = new CreateTodoRequestValidator();
+        var validator        = new CreateTodoRequestValidator();
         var validationResult = await validator.ValidateAsync(request);
         if (!validationResult.IsValid) return Results.BadRequest(validationResult.Errors);
 
@@ -45,11 +43,11 @@ internal sealed class CreateTodo : IEndpoint {
         };
     }
 
-    internal sealed record CreateTodoRequest {
+    private sealed record CreateTodoRequest {
         public required string RawTitle { get; init; }
     }
 
-    internal sealed class CreateTodoRequestValidator : AbstractValidator<CreateTodoRequest> {
+    private sealed class CreateTodoRequestValidator : AbstractValidator<CreateTodoRequest> {
         public CreateTodoRequestValidator() {
             RuleFor(r => r.RawTitle).NotEmpty();
         }
