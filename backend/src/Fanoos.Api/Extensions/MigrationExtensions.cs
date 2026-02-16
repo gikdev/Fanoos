@@ -1,4 +1,4 @@
-﻿using Fanoos.Modules.Main.Infrastructure.Database;
+﻿using Fanoos.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fanoos.Api.Extensions;
