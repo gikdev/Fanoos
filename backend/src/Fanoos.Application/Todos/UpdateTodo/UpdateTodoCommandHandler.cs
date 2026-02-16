@@ -12,6 +12,8 @@ internal sealed class UpdateTodoCommandHandler(
     public async Task<ErrorOr<Todo>> Handle(UpdateTodoCommand request, CancellationToken cancellationToken) {
         Todo? todo = await todoRepository.GetOneByIdAsync(request.Id, cancellationToken);
 
+        if (todo is null) return Error.NotFound(description: "Task was not found");
+
         todo.UpdateTitle(request.RawTitle);
 
         await todoRepository.UpdateAsync(todo, cancellationToken);

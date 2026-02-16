@@ -12,6 +12,8 @@ internal sealed class ToggleTodoCommandHandler(
     public async Task<ErrorOr<Todo>> Handle(ToggleTodoCommand request, CancellationToken cancellationToken) {
         Todo? todo = await todoRepository.GetOneByIdAsync(request.Id, cancellationToken);
 
+        if (todo is null) return Error.NotFound(description: "Task was not found");
+
         todo.UpdateDone(request.IsDone);
 
         await todoRepository.UpdateAsync(todo, cancellationToken);
