@@ -13,8 +13,18 @@ public class TodoRepository(
         return Task.CompletedTask;
     }
 
+    public Task UpdateAsync(Todo todo, CancellationToken cancellationToken = default) {
+        db.Todos.Update(todo);
+        return Task.CompletedTask;
+    }
+
     public async Task<List<Todo>> ListAsync(CancellationToken cancellationToken = default) {
         List<Todo> todos = await db.Todos.ToListAsync(cancellationToken: cancellationToken);
         return todos;
+    }
+
+    public async Task<Todo?> GetOneByIdAsync(Guid id, CancellationToken cancellationToken = default) {
+        Todo? todo = await db.Todos.FirstOrDefaultAsync(t => t.Id == id);
+        return todo;
     }
 }

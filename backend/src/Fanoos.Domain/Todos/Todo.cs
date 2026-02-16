@@ -47,6 +47,10 @@ public class Todo : IAggregateRoot {
         Title       = GetCleanTitle(newTitle);
     }
 
+    public void UpdateDone(bool? isDone) {
+        IsDone = isDone ?? !IsDone;
+    }
+
     public string ToRawString() {
         List<string> parts = [];
 
