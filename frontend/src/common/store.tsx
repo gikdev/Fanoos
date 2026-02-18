@@ -10,7 +10,9 @@ export const store = configureStore({
   reducer: rootReducer,
 })
 
-export const AppStoreProvider = (p: PropsWithChildren) => <Provider store={store}>{p.children}</Provider>
+export const AppStoreProvider = (p: PropsWithChildren) => (
+  <Provider store={store}>{p.children}</Provider>
+)
 
 export type AppStore = typeof store
 export const useAppStore = useStore.withTypes<AppStore>()

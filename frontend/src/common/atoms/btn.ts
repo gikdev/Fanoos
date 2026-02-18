@@ -1,5 +1,4 @@
-import type { ComponentProps } from "react"
-import { tv, type VariantProps } from "tailwind-variants"
+import { tv } from "tailwind-variants"
 
 export const btn = tv({
   base: `
@@ -29,13 +28,3 @@ export const btn = tv({
     isIcon: false,
   },
 })
-
-export type BtnProps = ComponentProps<"button"> & VariantProps<typeof btn> & {}
-
-export function Btn({ className, isIcon, children, ...rest }: BtnProps) {
-  return (
-    <button type="button" className={btn({ className, isIcon })} {...rest}>
-      {children}
-    </button>
-  )
-}

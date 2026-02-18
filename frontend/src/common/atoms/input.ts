@@ -1,4 +1,3 @@
-import type { ComponentProps } from "react"
 import { tv } from "tailwind-variants"
 
 export const input = tv({
@@ -21,7 +20,3 @@ export const input = tv({
     disabled:opacity-50
   `,
 })
-
-export const Input = ({ className, ...props }: ComponentProps<"input">) => (
-  <input dir="auto" className={input({ className })} {...props} />
-)

@@ -12,7 +12,8 @@ tasks:
   type-check:
     aliases: [t]
     cmds:
-      - npm run tsc -- -b
+      - npm run svelte-check -- --tsconfig ./tsconfig.app.json
+      - npm run tsc -- -p tsconfig.node.json
 
   build:raw: npm run vite -- build
 

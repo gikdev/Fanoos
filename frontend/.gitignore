@@ -1,3 +1,6 @@
+# Custom
+.router/
+
 # Logs
 logs
 *.log

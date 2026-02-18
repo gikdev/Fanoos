@@ -1,4 +1,3 @@
-import type { ComponentProps } from "react"
 import { tv } from "tailwind-variants"
 
 export const nativeSelect = tv({
@@ -26,9 +25,3 @@ export const nativeSelect = tv({
     disabled:cursor-not-allowed
   `,
 })
-
-type NativeSelectProps = ComponentProps<"select">
-
-export const NativeSelect = ({ className, ...props }: NativeSelectProps) => (
-  <select dir="auto" className={nativeSelect({ className })} {...props} />
-)
