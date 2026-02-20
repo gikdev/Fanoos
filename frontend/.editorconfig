@@ -1,4 +1,0 @@
-root = false
-
-[*.{svelte,js,jsx,ts,tsx,html,css}]
-indent_size = 2

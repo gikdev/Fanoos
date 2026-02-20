@@ -1,3 +1,0 @@
-# Fanoos
-
-The all in one tool I'm building for myself...

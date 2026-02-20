@@ -1,0 +1,65 @@
+# https://taskfile.dev
+version: '3'
+
+tasks:
+  list-all:
+    aliases: [ default ]
+    desc: List all tasks.
+    cmds:
+      - task --list-all
+
+  dev:
+    aliases: [ d ]
+    desc: "Start Vite dev server"
+    cmds:
+      - npm run vite
+
+  build-only:
+    desc: "Build project without type checking"
+    cmds:
+      - npm run vite -- build
+
+  type-check:
+    aliases: [ t ]
+    desc: "Run TypeScript type checking"
+    cmds:
+      - npm run vue-tsc -- --build
+
+  build:
+    desc: "Run type-check then build project"
+    cmds:
+      - task: type-check
+      - task: build-only
+
+  preview:
+    desc: "Preview the built project"
+    cmds:
+      - npm run vite -- preview
+
+  test:unit:
+    desc: "Run unit tests with Vitest"
+    cmds:
+      - npm run vitest
+
+  lint:oxlint:
+    desc: "Lint project with Oxlint and auto-fix"
+    cmds:
+      - npm run oxlint -- . --fix
+
+  lint:eslint:
+    desc: "Lint project with ESLint and auto-fix"
+    cmds:
+      - npm run eslint -- . --fix --cache
+
+  lint:
+    aliases: [ l ]
+    desc: "Run all linters sequentially"
+    cmds:
+      - task: lint:oxlint
+      - task: lint:eslint
+
+  format:
+    aliases: [ f ]
+    desc: "Format files with Oxfmt"
+    cmds:
+      - npm run oxfmt -- ./src/

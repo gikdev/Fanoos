@@ -7,13 +7,10 @@ insert_final_newline = true
 indent_style = space
 trim_trailing_whitespace = true
 max_line_length = 120
-
-[*.{xml,slnx,props,targets,config,nuspec,csproj,fsproj,vbproj,proj}]
 indent_size = 2
 
-[*.{yml,yaml,json,html,css,js,jsx,ts,tsx}]
-indent_size = 2
-
-[*.md]
-trim_trailing_whitespace = false
+[*.{cs}]
 indent_size = 4
+
+[*.{md}]
+trim_trailing_whitespace = false
