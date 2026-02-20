@@ -1,10 +1,8 @@
 namespace Fanoos.Common.Exceptions;
 
-public sealed class FanoosException : Exception {
-    public FanoosException(string requestName, Exception? innerException = default)
-        : base("Application exception", innerException) {
-        RequestName = requestName;
-    }
-
-    public string RequestName { get; }
+public sealed class FanoosException(
+    string requestName,
+    Exception? innerException = default
+) : Exception("Application exception", innerException) {
+    public string RequestName { get; } = requestName;
 }

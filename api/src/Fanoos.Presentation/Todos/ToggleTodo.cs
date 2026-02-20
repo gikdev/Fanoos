@@ -1,7 +1,7 @@
 using ErrorOr;
 using Fanoos.Application.Todos.ToggleTodo;
+using Fanoos.Common.Api;
 using Fanoos.Common.Endpoints;
-using Fanoos.Common.Extensions;
 using Fanoos.Domain.Todos;
 using Fanoos.Presentation.Todos.Common;
 using FluentValidation;
@@ -30,10 +30,8 @@ internal sealed class ToggleTodo : IEndpoint {
         [FromBody] ToggleTodoRequest? request = null
     ) {
         ErrorOr<Todo> result = await mediator.Send(MapToCommand(request, id));
-        if (result.IsError) return result.Errors.ToProblem();
 
-        Todo todo = result.Value;
-        return Results.Ok(todo.MapToResponse());
+        return result.MatchResponse(item => Results.Ok(item.MapToResponse()));
     }
 
     private static ToggleTodoCommand MapToCommand(ToggleTodoRequest? request, Guid id) {
@@ -43,7 +41,7 @@ internal sealed class ToggleTodo : IEndpoint {
         };
     }
 
-    internal sealed record ToggleTodoRequest {
+    private sealed record ToggleTodoRequest {
         public bool? IsDone { get; init; }
     }
 }

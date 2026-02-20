@@ -1,7 +1,7 @@
 using ErrorOr;
 using Fanoos.Application.Todos.UpdateTodo;
+using Fanoos.Common.Api;
 using Fanoos.Common.Endpoints;
-using Fanoos.Common.Extensions;
 using Fanoos.Domain.Todos;
 using Fanoos.Presentation.Todos.Common;
 using FluentValidation;
@@ -31,13 +31,11 @@ internal sealed class UpdateTodo : IEndpoint {
     ) {
         var validator = new UpdateTodoRequestValidator();
         var validationResult = await validator.ValidateAsync(request);
-        if (!validationResult.IsValid) return Results.BadRequest(validationResult.Errors);
+        if (!validationResult.IsValid) return validationResult.ToValidationProblem();
 
         ErrorOr<Todo> result = await mediator.Send(MapToCommand(request, id));
-        if (result.IsError) return result.Errors.ToProblem();
 
-        Todo todo = result.Value;
-        return Results.Ok(todo.MapToResponse());
+        return result.MatchResponse(item => Results.Ok(item.MapToResponse()));
     }
 
     private static UpdateTodoCommand MapToCommand(UpdateTodoRequest request, Guid id) {

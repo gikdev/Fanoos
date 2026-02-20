@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Fanoos.Infrastructure.Todos;
 
-public class TodoRepository(
+internal sealed class TodoRepository(
     MainDbCtx db
 ) : ITodoRepository {
     public Task AddAsync(Todo todo, CancellationToken cancellationToken = default) {
@@ -26,5 +26,10 @@ public class TodoRepository(
     public async Task<Todo?> GetOneByIdAsync(Guid id, CancellationToken cancellationToken = default) {
         Todo? todo = await db.Todos.FirstOrDefaultAsync(t => t.Id == id);
         return todo;
+    }
+
+    public Task RemoveAsync(Todo todo, CancellationToken cancellationToken = default) {
+        db.Todos.Remove(todo);
+        return Task.CompletedTask;
     }
 }

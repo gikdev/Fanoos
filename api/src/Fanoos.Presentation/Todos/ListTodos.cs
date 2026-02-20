@@ -28,12 +28,12 @@ internal sealed class ListTodos : IEndpoint {
         return Results.Ok(MapToListResponse(todos));
     }
 
-    internal sealed record TodoListResponse {
+    private sealed record TodoListResponse {
         public required List<TodoResponse> Items { get; init; }
-        public required Summary Summary { get; init; }
+        public required TodoListSummary Summary { get; init; }
     }
 
-    internal sealed record Summary {
+    private sealed record TodoListSummary {
         public required IEnumerable<string> Tags { get; init; }
         public required IEnumerable<string> Contexts { get; init; }
         public required IEnumerable<string> Projects { get; init; }
@@ -41,7 +41,7 @@ internal sealed class ListTodos : IEndpoint {
 
     private static TodoListResponse MapToListResponse(List<Todo> todos) {
         return new TodoListResponse {
-            Items = todos.Select(t => t.MapToResponse()).ToList(),
+            Items = todos.ConvertAll(t => t.MapToResponse()),
             Summary = new() {
                 Contexts = todos.Select(t => t.Context ?? "").Where(i => !string.IsNullOrWhiteSpace(i)).ToHashSet(),
                 Projects = todos.Select(t => t.Project ?? "").Where(i => !string.IsNullOrWhiteSpace(i)).ToHashSet(),

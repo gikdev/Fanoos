@@ -1,6 +1,6 @@
 namespace Fanoos.Presentation.Todos.Common;
 
-public record class TodoResponse {
+internal record class TodoResponse {
     public required Guid Id { get; init; }
     public required string Title { get; init; }
     public required string RawTitle { get; init; }

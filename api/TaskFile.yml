@@ -4,6 +4,7 @@ version: '3'
 vars:
   STARTUP_PATH: "./src/Fanoos.Api"
   PROJECT_PATH: "./src/Fanoos.Infrastructure"
+  ASPNETCORE_ENVIRONMENT: Development
 
 tasks:
   list-all:

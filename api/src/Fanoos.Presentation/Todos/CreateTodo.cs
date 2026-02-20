@@ -1,6 +1,6 @@
 using Fanoos.Application.Todos.CreateTodo;
+using Fanoos.Common.Api;
 using Fanoos.Common.Endpoints;
-using Fanoos.Common.Extensions;
 using Fanoos.Presentation.Todos.Common;
 using FluentValidation;
 using MediatR;
@@ -28,13 +28,13 @@ internal sealed class CreateTodo : IEndpoint {
     ) {
         var validator = new CreateTodoRequestValidator();
         var validationResult = await validator.ValidateAsync(request);
-        if (!validationResult.IsValid) return Results.BadRequest(validationResult.Errors);
+        if (!validationResult.IsValid) return validationResult.ToValidationProblem();
 
         var result = await mediator.Send(MapToCommand(request));
-        if (result.IsError) return result.Errors.ToProblem();
 
-        var todo = result.Value;
-        return Results.Ok(todo.MapToResponse());
+        return result.MatchResponse(
+            item => Results.Ok(item.MapToResponse())
+        );
     }
 
     private static CreateTodoCommand MapToCommand(CreateTodoRequest request) {
