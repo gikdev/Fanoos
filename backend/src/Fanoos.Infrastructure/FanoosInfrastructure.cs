@@ -14,7 +14,7 @@ namespace Fanoos.Infrastructure;
 public static class FanoosInfrastructure {
     public static IServiceCollection AddFanoosInfrastructure(
         this IServiceCollection services,
-        IConfiguration          configuration
+        IConfiguration configuration
     ) {
         services.AddDbContext<MainDbCtx>((sp, options) =>
             options

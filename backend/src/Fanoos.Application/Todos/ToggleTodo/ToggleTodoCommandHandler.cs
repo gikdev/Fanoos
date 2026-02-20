@@ -7,7 +7,7 @@ namespace Fanoos.Application.Todos.ToggleTodo;
 
 internal sealed class ToggleTodoCommandHandler(
     ITodoRepository todoRepository,
-    IUnitOfWork     unitOfWork
+    IUnitOfWork unitOfWork
 ) : IRequestHandler<ToggleTodoCommand, ErrorOr<Todo>> {
     public async Task<ErrorOr<Todo>> Handle(ToggleTodoCommand request, CancellationToken cancellationToken) {
         Todo? todo = await todoRepository.GetOneByIdAsync(request.Id, cancellationToken);

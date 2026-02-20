@@ -1,4 +1,4 @@
-﻿using Fanoos.Common.Exceptions;
+using Fanoos.Common.Exceptions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -9,9 +9,9 @@ internal sealed class ExceptionHandlingPipelineBehavior<TRequest, TResponse>(
 ) : IPipelineBehavior<TRequest, TResponse>
     where TRequest : class {
     public async Task<TResponse> Handle(
-        TRequest                          request,
+        TRequest request,
         RequestHandlerDelegate<TResponse> next,
-        CancellationToken                 cancellationToken
+        CancellationToken cancellationToken
     ) {
         try {
             return await next(cancellationToken);

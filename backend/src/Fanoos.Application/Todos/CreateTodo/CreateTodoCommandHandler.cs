@@ -7,7 +7,7 @@ namespace Fanoos.Application.Todos.CreateTodo;
 
 internal sealed class CreateTodoCommandHandler(
     ITodoRepository todoRepository,
-    IUnitOfWork     unitOfWork
+    IUnitOfWork unitOfWork
 ) : IRequestHandler<CreateTodoCommand, ErrorOr<Todo>> {
     public async Task<ErrorOr<Todo>> Handle(CreateTodoCommand request, CancellationToken cancellationToken) {
         var todo = Todo.FromRaw(request.RawTitle);

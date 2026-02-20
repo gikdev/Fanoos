@@ -1,10 +1,10 @@
+using ErrorOr;
 using Fanoos.Application.Todos.UpdateTodo;
 using Fanoos.Common.Endpoints;
 using Fanoos.Common.Extensions;
 using Fanoos.Domain.Todos;
 using Fanoos.Presentation.Todos.Common;
 using FluentValidation;
-using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -25,11 +25,11 @@ internal sealed class UpdateTodo : IEndpoint {
     }
 
     private static async Task<IResult> Handle(
-        [FromServices] ISender           mediator,
-        [FromRoute]    Guid              id,
-        [FromBody]     UpdateTodoRequest request
+        [FromServices] ISender mediator,
+        [FromRoute] Guid id,
+        [FromBody] UpdateTodoRequest request
     ) {
-        var validator        = new UpdateTodoRequestValidator();
+        var validator = new UpdateTodoRequestValidator();
         var validationResult = await validator.ValidateAsync(request);
         if (!validationResult.IsValid) return Results.BadRequest(validationResult.Errors);
 
@@ -42,7 +42,7 @@ internal sealed class UpdateTodo : IEndpoint {
 
     private static UpdateTodoCommand MapToCommand(UpdateTodoRequest request, Guid id) {
         return new UpdateTodoCommand {
-            Id       = id,
+            Id = id,
             RawTitle = request.RawTitle
         };
     }

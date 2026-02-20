@@ -8,43 +8,43 @@ public class Todo : IAggregateRoot {
     private Todo() { }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
-    public string  Title       { get; private set; }
-    public string? Context     { get; private set; }
-    public string? Project     { get; private set; }
-    public string? Time        { get; private set; }
-    public string? Tag         { get; private set; }
-    public string? Energy      { get; private set; }
-    public bool    IsImportant { get; private set; }
-    public bool    IsUrgent    { get; private set; }
-    public bool    IsDone      { get; private set; }
-    public Guid    Id          { get; private init; }
+    public string Title { get; private set; }
+    public string? Context { get; private set; }
+    public string? Project { get; private set; }
+    public string? Time { get; private set; }
+    public string? Tag { get; private set; }
+    public string? Energy { get; private set; }
+    public bool IsImportant { get; private set; }
+    public bool IsUrgent { get; private set; }
+    public bool IsDone { get; private set; }
+    public Guid Id { get; private init; }
 
     public static Todo FromRaw(string raw) {
         Todo todo = new() {
-            Context     = ExtractSingle(raw, @"@(\S+)"),
-            Energy      = ExtractSingle(raw, @"\$(\S+)"),
-            Id          = Guid.NewGuid(),
-            IsDone      = false,
+            Context = ExtractSingle(raw, @"@(\S+)"),
+            Energy = ExtractSingle(raw, @"\$(\S+)"),
+            Id = Guid.NewGuid(),
+            IsDone = false,
             IsImportant = GetIsImportant(raw),
-            IsUrgent    = GetIsUrgent(raw),
-            Project     = ExtractSingle(raw, @"\+(\S+)"),
-            Tag         = ExtractSingle(raw, @"#(\S+)"),
-            Time        = ExtractSingle(raw, @"~(\S+)"),
-            Title       = GetCleanTitle(raw)
+            IsUrgent = GetIsUrgent(raw),
+            Project = ExtractSingle(raw, @"\+(\S+)"),
+            Tag = ExtractSingle(raw, @"#(\S+)"),
+            Time = ExtractSingle(raw, @"~(\S+)"),
+            Title = GetCleanTitle(raw)
         };
 
         return todo;
     }
 
     public void UpdateTitle(string newTitle) {
-        Context     = ExtractSingle(newTitle, @"@(\S+)");
-        Energy      = ExtractSingle(newTitle, @"\$(\S+)");
+        Context = ExtractSingle(newTitle, @"@(\S+)");
+        Energy = ExtractSingle(newTitle, @"\$(\S+)");
         IsImportant = GetIsImportant(newTitle);
-        IsUrgent    = GetIsUrgent(newTitle);
-        Project     = ExtractSingle(newTitle, @"\+(\S+)");
-        Tag         = ExtractSingle(newTitle, @"#(\S+)");
-        Time        = ExtractSingle(newTitle, @"~(\S+)");
-        Title       = GetCleanTitle(newTitle);
+        IsUrgent = GetIsUrgent(newTitle);
+        Project = ExtractSingle(newTitle, @"\+(\S+)");
+        Tag = ExtractSingle(newTitle, @"#(\S+)");
+        Time = ExtractSingle(newTitle, @"~(\S+)");
+        Title = GetCleanTitle(newTitle);
     }
 
     public void UpdateDone(bool? isDone) {

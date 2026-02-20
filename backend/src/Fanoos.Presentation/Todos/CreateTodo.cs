@@ -23,10 +23,10 @@ internal sealed class CreateTodo : IEndpoint {
     }
 
     private static async Task<IResult> Handle(
-        [FromServices] ISender           mediator,
-        [FromBody]     CreateTodoRequest request
+        [FromServices] ISender mediator,
+        [FromBody] CreateTodoRequest request
     ) {
-        var validator        = new CreateTodoRequestValidator();
+        var validator = new CreateTodoRequestValidator();
         var validationResult = await validator.ValidateAsync(request);
         if (!validationResult.IsValid) return Results.BadRequest(validationResult.Errors);
 

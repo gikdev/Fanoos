@@ -1,4 +1,4 @@
-﻿namespace Fanoos.Common.Exceptions;
+namespace Fanoos.Common.Exceptions;
 
 public sealed class FanoosException : Exception {
     public FanoosException(string requestName, Exception? innerException = default)

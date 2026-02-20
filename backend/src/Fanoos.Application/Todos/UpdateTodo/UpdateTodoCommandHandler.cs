@@ -7,7 +7,7 @@ namespace Fanoos.Application.Todos.UpdateTodo;
 
 internal sealed class UpdateTodoCommandHandler(
     ITodoRepository todoRepository,
-    IUnitOfWork     unitOfWork
+    IUnitOfWork unitOfWork
 ) : IRequestHandler<UpdateTodoCommand, ErrorOr<Todo>> {
     public async Task<ErrorOr<Todo>> Handle(UpdateTodoCommand request, CancellationToken cancellationToken) {
         Todo? todo = await todoRepository.GetOneByIdAsync(request.Id, cancellationToken);

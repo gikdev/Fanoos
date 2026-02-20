@@ -3,7 +3,7 @@ using Fanoos.Common.Endpoints;
 using Fanoos.Infrastructure;
 using Scalar.AspNetCore;
 
-var builder       = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
