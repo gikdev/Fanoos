@@ -1,8 +1,9 @@
 ﻿namespace Backend.Domain.InDevelopment;
 
-public record Transaction : Entity {
-    public required string          Title           { get; init; }
-    public required long            Amount          { get; init; }
-    public required DateTimeOffset? OccurredAt      { get; init; }
-    public required Guid?           RelatedBudgetId { get; init; }
+public record Transaction : Entity
+{
+  public required string Note { get; init; }
+  public required int Amount { get; init; }
+  public required bool IsPositive { get; init; }
+  public required DateTime CreatedAt { get; init; }
 }
