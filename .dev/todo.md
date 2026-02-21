@@ -1,0 +1,6 @@
+- Make a very simple UI for managing tasks:
+  - List tasks properly
+  - Let create a task (single input)
+  - Let to "check/uncheck"
+  - Let delete a task
+  - Let update a task (single input)
