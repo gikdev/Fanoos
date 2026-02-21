@@ -2,42 +2,50 @@
 version: '3'
 
 vars:
-  STARTUP_PATH: "./src/Fanoos.Api"
-  PROJECT_PATH: "./src/Fanoos.Infrastructure"
   ASPNETCORE_ENVIRONMENT: Development
+  PROJECT_PATH: "./src/Fanoos.Infrastructure"
+  SOLUTION_FILE_PATH: "./Fanoos.slnx"
+  STARTUP_PATH: "./src/Fanoos.Api"
 
 tasks:
-  list-all:
-    aliases: [ default ]
+  default:
     desc: List all the tasks.
     cmds:
       - task --list-all
 
-  dev:
+  dotnet:dev:
     aliases: [ d ]
     desc: Run the project in dev mode
     cmds:
-      - dotnet run --project ./src/Fanoos.Api/ --no-restore
+      - dotnet run --project {{.SOLUTION_FILE_PATH}} --no-restore
+    requires:
+      vars: [ SOLUTION_FILE_PATH ]
 
-  restore:
+  dotnet:restore:
     aliases: [ r ]
     desc: Restore the whole solution.
     cmds:
-      - dotnet restore ./Fanoos.slnx
+      - dotnet restore {{.SOLUTION_FILE_PATH}}
+    requires:
+      vars: [ SOLUTION_FILE_PATH ]
 
-  format:
+  dotnet:format:
     aliases: [ f ]
     desc: Format the project
     cmds:
-      - dotnet format ./Fanoos.slnx
+      - dotnet format {{.SOLUTION_FILE_PATH}}
+    requires:
+      vars: [ SOLUTION_FILE_PATH ]
 
-  build:
+  dotnet:build:
     aliases: [ b ]
     desc: Build the project
     cmds:
-      - dotnet build ./Fanoos.slnx
+      - dotnet build {{.SOLUTION_FILE_PATH}}
+    requires:
+      vars: [ SOLUTION_FILE_PATH ]
 
-  migrate:
+  migration:all:
     aliases: [ m ]
     desc: Generate & run EF migrations.
     cmds:
@@ -60,31 +68,12 @@ tasks:
     requires:
       vars: [ PROJECT_PATH, STARTUP_PATH ]
 
-  dc:up:
+  docker:up:
     desc: Start all services (detached)
     cmds:
       - docker compose up -d
 
-  dc:down:
-    desc: Stop all services (keep volumes)
-    cmds:
-      - docker compose down
-
-  dc:restart:
-    desc: Restart services
-    cmds:
-      - task down
-      - task up
-
-  dc:reset:
-    desc: ⚠️ Stop and delete database data folder
-    cmds:
-      - docker compose down
-      - rm -rf ./.containers/
-      - mkdir -p ./.containers/
-      - docker compose up -d
-
-  dc:db:shell:
+  db:shell:
     desc: Open psql shell inside container
     interactive: true
     cmds:
