@@ -36,6 +36,18 @@ tasks:
     cmds:
       - npm run vite -- preview
 
+  api-client:get-definition:
+    aliases: [ acgd ]
+    desc: "Get the OpenAPI defintion required to generate the API client."
+    cmds:
+      - curl -o "./src/common/api/openapi.yaml" "http://localhost:5000/openapi.yaml"
+
+  api-client:generate:
+    aliases: [ acg ]
+    desc: "Generate the API client."
+    cmds:
+      - npm run openapi-ts
+
   test:unit:
     desc: "Run unit tests with Vitest"
     cmds:

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed } from 'vue'
 import { input } from './input'
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 
 const props = defineProps<Props>()
 
-const finalClass = computed(() => input({ className: props.class ?? "" }))
+const finalClass = computed(() => input({ className: props.class ?? '' }))
 </script>
 
 <template>

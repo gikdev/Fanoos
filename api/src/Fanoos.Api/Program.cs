@@ -13,13 +13,15 @@ builder.Services.AddFanoosInfrastructure(configuration);
 
 var app = builder.Build();
 
-// if (app.Environment.IsDevelopment()) {
-//     app.ApplyMigrations();
-// }
+if (app.Environment.IsDevelopment()) {
+    app.ApplyMigrations();
+}
 
 app.UseExceptionHandler();
-app.MapEndpoints();
+RouteGroupBuilder apiGroup = app.MapGroup("/api");
+app.MapEndpoints(apiGroup);
 app.MapOpenApi();
+app.MapOpenApi("/openapi.yaml");
 app.MapScalarApiReference();
 
 app.Run();
