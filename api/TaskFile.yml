@@ -17,9 +17,9 @@ tasks:
     aliases: [ d ]
     desc: Run the project in dev mode
     cmds:
-      - dotnet run --project {{.SOLUTION_FILE_PATH}} --no-restore
+      - dotnet run --project {{.STARTUP_PATH}} --no-restore
     requires:
-      vars: [ SOLUTION_FILE_PATH ]
+      vars: [ STARTUP_PATH ]
 
   dotnet:restore:
     aliases: [ r ]
