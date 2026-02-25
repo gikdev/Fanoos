@@ -1,19 +1,20 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import TodoView from '#/views/todo/TodoView.vue'
+
+const routes: RouteRecordRaw[] = [
+  {
+    path: '/',
+    name: 'home',
+    redirect: '/todo',
+  },
+  {
+    path: '/todo',
+    name: 'todo',
+    component: TodoView,
+  },
+]
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      redirect: '/todo',
-      // component: HomeView,
-    },
-    {
-      path: '/todo',
-      name: 'todo',
-      component: TodoView,
-    },
-  ],
+  routes,
 })
