@@ -1,5 +1,5 @@
+import TodoView from '#/views/TodoView.vue'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
-import TodoView from '#/views/todo/TodoView.vue'
 
 const routes: RouteRecordRaw[] = [
   {

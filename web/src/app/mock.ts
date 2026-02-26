@@ -1,10 +1,8 @@
 import { setupWorker } from 'msw/browser'
-import * as todos from "#/features/todos/mocks"
+import * as todos from '#/features/todos/mocks'
 import type { HttpHandler } from 'msw'
 
-const handlers: HttpHandler[] = [
-  ...Object.values(todos),
-]
+const handlers: HttpHandler[] = [...Object.values(todos)]
 
 export async function enableMocking() {
   if (!import.meta.env.DEV) return
