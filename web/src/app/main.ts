@@ -4,6 +4,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import { router } from './router'
 import { PiniaColada } from '@pinia/colada'
+import { enableMocking } from './mock'
 
 const app = createApp(App)
 
@@ -20,4 +21,6 @@ const TARGET = '#app'
 if (document.querySelector(TARGET) == null)
   throw new Error(`The element '${TARGET}' was not found!`)
 
-app.mount(TARGET)
+enableMocking().then(() => {
+  app.mount(TARGET)
+})
