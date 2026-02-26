@@ -2,76 +2,89 @@
 version: '3'
 
 tasks:
-  list-all:
+
+  # ---- meta ----
+  meta:list:
     aliases: [ default ]
-    desc: List all tasks.
+    desc: List all tasks
     cmds:
       - task --list-all
 
-  dev:
-    aliases: [ d ]
-    desc: "Start Vite dev server"
+  # ---- app ----
+  app:dev:
+    aliases: [ dev, d ]
+    desc: Start Vite dev server
     cmds:
       - npm run vite
 
-  build-only:
-    desc: "Build project without type checking"
-    cmds:
-      - npm run vite -- build
-
-  type-check:
-    aliases: [ t ]
-    desc: "Run TypeScript type checking"
-    cmds:
-      - npm run vue-tsc -- --build
-
-  build:
-    desc: "Run type-check then build project"
-    cmds:
-      - task: type-check
-      - task: build-only
-
-  preview:
-    desc: "Preview the built project"
+  app:preview:
+    desc: Preview production build
     cmds:
       - npm run vite -- preview
 
-  api-client:get-definition:
+  app:type-check:
+    aliases: [ t ]
+    desc: Run TypeScript type checking
+    cmds:
+      - npm run vue-tsc -- --build
+
+  app:build:full:
+    desc: Type-check then build project
+    cmds:
+      - task: app:type-check
+      - task: app:build:only
+
+  app:build:only:
+    desc: Build project without type checking
+    cmds:
+      - npm run vite -- build
+
+  # ---- api ----
+  api:def:
     aliases: [ acgd ]
-    desc: "Get the OpenAPI defintion required to generate the API client."
+    desc: Download OpenAPI definition
     cmds:
       - curl -o "./src/common/api/openapi.yaml" "http://localhost:5000/openapi.yaml"
 
-  api-client:generate:
+  api:gen:
     aliases: [ acg ]
-    desc: "Generate the API client."
+    desc: Generate API client
     cmds:
       - npm run openapi-ts
 
+  api:all:
+    desc: Refresh API client (definition + generate)
+    cmds:
+      - task: api:def
+      - task: api:gen
+
+  # ---- test ----
   test:unit:
-    desc: "Run unit tests with Vitest"
+    desc: Run unit tests with Vitest
     cmds:
       - npm run vitest
 
-  lint:oxlint:
-    desc: "Lint project with Oxlint and auto-fix"
+  # ---- lint ----
+  lint:all:
+    aliases: [ l ]
+    desc: Run all linters sequentially
+    cmds:
+      - task: lint:ox
+      - task: lint:eslint
+
+  lint:ox:
+    desc: Lint with Oxlint (auto-fix)
     cmds:
       - npm run oxlint -- . --fix
 
   lint:eslint:
-    desc: "Lint project with ESLint and auto-fix"
+    desc: Lint with ESLint (auto-fix + cache)
     cmds:
       - npm run eslint -- . --fix --cache
 
-  lint:
-    aliases: [ l ]
-    desc: "Run all linters sequentially"
-    cmds:
-      - task: lint:oxlint
-      - task: lint:eslint
-
-  format:
+  # ---- format ----
+  quality:format:
     aliases: [ f ]
-    desc: "Format files with Oxfmt"
+    desc: Format files with Oxfmt
     cmds:
       - npm run oxfmt -- ./src/
