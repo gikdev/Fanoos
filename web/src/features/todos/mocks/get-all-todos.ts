@@ -5,7 +5,7 @@ export const getAllTodos = http.get('/api/todos', ({ request }) => {
   const url = new URL(request.url)
   const sort = url.searchParams.get('sort')
 
-  let items = [...todosRepo.getTodos().items]
+  const items = [...todosRepo.getTodos().items]
 
   if (sort === 'context') {
     items.sort((a, b) => (a.context ?? '').localeCompare(b.context ?? ''))

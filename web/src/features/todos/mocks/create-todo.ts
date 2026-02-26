@@ -1,4 +1,3 @@
-import { defineMutation } from '@pinia/colada'
 import { http, HttpResponse } from 'msw'
 import { todosRepo, type TodoResponse } from './common'
 import * as v from 'valibot'

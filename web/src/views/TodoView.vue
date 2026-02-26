@@ -2,7 +2,7 @@
 import CreateTodoForm from '#/features/todos/molecules/CreateTodoForm.vue'
 import TodoHeader from '#/features/todos/organisms/TodoHeader.vue'
 import TodosList from '#/features/todos/organisms/TodosList.vue'
-import { useMutation, useQuery, useQueryCache } from '@pinia/colada'
+import { useMutation, useQuery } from '@pinia/colada'
 import * as v from 'valibot'
 import { createTodoFetch } from '#/features/todos/mocks/create-todo'
 import { ref } from 'vue'
@@ -42,7 +42,7 @@ function createTodo(title: string) {
 }
 
 function changeSort(value: string) {
-  sort.value = (sort.value === value) ? null : value
+  sort.value = sort.value === value ? null : value
   todosQuery.refetch()
 }
 </script>
@@ -52,11 +52,22 @@ function changeSort(value: string) {
     <TodoHeader />
 
     <main class="px-4 flex-1 overflow-y-auto">
-      <CreateTodoForm :is-loading="mutation.isLoading.value" :validator="validateTodoTitle" @submit="createTodo" />
+      <CreateTodoForm
+        :is-loading="mutation.isLoading.value"
+        :validator="validateTodoTitle"
+        @submit="createTodo"
+      />
 
-      <TodoSortBar :sort="sort" @sort="changeSort" :sort-options="['context', 'time', 'tag', 'energy']" />
+      <TodoSortBar
+        :sort="sort"
+        @sort="changeSort"
+        :sort-options="['context', 'time', 'tag', 'energy']"
+      />
 
-      <TodosList v-if="todosQuery.status.value === 'success'" :items="todosQuery.data.value?.items ?? []" />
+      <TodosList
+        v-if="todosQuery.status.value === 'success'"
+        :items="todosQuery.data.value?.items ?? []"
+      />
       <p v-else-if="todosQuery.status.value === 'pending'" class="p-4">Loading...</p>
       <p v-else class="p-4 text-red-400">Failed to load todos</p>
     </main>
